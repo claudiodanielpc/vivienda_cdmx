@@ -38,7 +38,7 @@ def easybroker():
     base_url="https://www.easyaviso.com/mx/inmuebles/casas-en-venta-en-ciudad-de-mexico?page={}"
     all_data_frames = []
 
-    for page_num in tqdm(range(1, 101), desc="Scraping Easybroker"):
+    for page_num in tqdm(range(1, 101), desc="Scrapeando Easybroker"):
         url = base_url.format(page_num)
         r = requests.get(url, headers=headers)
         sopa = BeautifulSoup(r.text, 'html.parser')
@@ -120,7 +120,7 @@ def lamudi():
     all_data = pd.DataFrame()  # To store data from elements
     all_complemento_data = pd.DataFrame()  # To store data from complemento
 
-    for i in tqdm(range(1, 101), desc="Scrapear Lamudi"):
+    for i in tqdm(range(1, 101), desc="Scrapeando Lamudi"):
         response = requests.get(url_basica + paginacion + str(i), headers=headers)
         time.sleep(random.randint(1, 3))
         soup = BeautifulSoup(response.text, "html.parser")
