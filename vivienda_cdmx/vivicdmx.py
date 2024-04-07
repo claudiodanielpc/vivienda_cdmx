@@ -112,7 +112,6 @@ def easybroker():
     return combined_df
 
 
-
 def lamudi():
     url_basica = "https://www.lamudi.com.mx/distrito-federal/casa/for-sale/"
     paginacion = "?page="
@@ -162,11 +161,9 @@ def lamudi():
                 longitud.append(item['geo']['longitude'] if 'longitude' in item['geo'] else None)
                 oferta_complemento.append(item['name'] if 'name' in item else None)
                 url_complemento.append(item['url'] if 'url' in item else None)
-                descripcion.append(item["description"] if "description" in item else None)
 
             complemento_page_data = pd.DataFrame(
-                {"oferta": oferta_complemento, "lat": latitud, "lon": longitud, "url": url_complemento,
-                 "descripcion": descripcion})
+                {"oferta": oferta_complemento, "lat": latitud, "lon": longitud, "url": url_complemento})
             all_complemento_data = pd.concat([all_complemento_data, complemento_page_data], ignore_index=True)
 
     # Merge the data from elements and complemento based on the URL
@@ -176,7 +173,6 @@ def lamudi():
     # Renombrar oferta_x a oferta
     final_data = final_data.rename(columns={"oferta_x": "oferta"})
     final_data["oferta"] = final_data["oferta"].apply(lambda x: tt.limpia_texto(x))
-    final_data["descripcion"] = final_data["descripcion"].apply(lambda x: tt.limpia_texto(x))
     final_data = final_data[~final_data["precio"].str.contains("Desde")]
     final_data['precio'] = final_data['precio'].apply(lambda x: tt.limpia_moneda(x))
     final_data["precio"] = final_data["precio"].str.replace("$", "", regex=False)
@@ -194,18 +190,8 @@ def lamudi():
     final_data = final_data.drop(columns=['moneda'])
     final_data = final_data.drop(columns=['size'])
 
-
     # Añadir fecha de consulta
     final_data["fecha_consulta"] = pd.to_datetime("today")
     final_data["fuente"] = "lamudi"
 
     return final_data
-
-
-
-
-
-
-
-
-
