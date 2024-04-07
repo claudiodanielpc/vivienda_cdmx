@@ -10,7 +10,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import vivienda_cdmx.tools.tidytext as tt
 import vivienda_cdmx.tools.tipo_cambio as tc
-import vivienda_cdmx.tools.amenities as am
 from tqdm import tqdm
 
 headers = {
