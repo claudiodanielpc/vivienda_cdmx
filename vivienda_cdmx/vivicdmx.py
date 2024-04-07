@@ -35,7 +35,7 @@ def equalize_lists(main_list, *lists):
 def easybroker():
     # base_url = "https://www.easybroker.com/mx/inmuebles?page={}&search_criteria%5Blocation_ids%5D=86640&search_criteria%5Boperation_type%5D=&update_url=true"
     #base_url = "https://www.easybroker.com/mx/inmuebles?page={}&search_criteria%5Bcurrency_id%5D=10&search_criteria%5Blocation_ids%5D=86618&search_criteria%5Bmax_price%5D=&search_criteria%5Bmin_price%5D=&search_criteria%5Boperation_type%5D=sale&search_criteria%5Bproperty_type_ids%5D%5B%5D=29058&update_url=true"
-    base_url="https://www.easyaviso.com/mx/inmuebles/casas-en-venta-en-ciudad-de-mexico?page={}"
+    base_url="https://www.easyaviso.com/mx/inmuebles/departamentos-en-venta-en-ciudad-de-mexico?page={}"
     all_data_frames = []
 
     for page_num in tqdm(range(1, 101), desc="Scrapeando Easybroker"):
@@ -43,7 +43,7 @@ def easybroker():
         r = requests.get(url, headers=headers)
         sopa = BeautifulSoup(r.text, 'html.parser')
 
-        # The scraping logic for each page.
+        # Cosas a obtener
         recamaras, bathrooms, superficie, direcciones, ofertas, precios, latitud, longitud = [], [], [], [], [], [], [], []
 
         for precio in sopa.find_all('li', class_='price'):
@@ -113,7 +113,7 @@ def easybroker():
 
 
 def lamudi():
-    url_basica = "https://www.lamudi.com.mx/distrito-federal/casa/for-sale/"
+    url_basica = "https://www.lamudi.com.mx/distrito-federal/departamento/for-sale/"
     paginacion = "?page="
 
     all_data = pd.DataFrame()  # To store data from elements
